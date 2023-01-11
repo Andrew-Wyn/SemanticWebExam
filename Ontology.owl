@@ -1,0 +1,357 @@
+@prefix : <http://www.semanticweb.org/medieval-renaissance-manuscripts#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/medieval-renaissance-manuscripts> .
+
+<http://www.semanticweb.org/medieval-renaissance-manuscripts> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#boughtBook
+:boughtBook rdf:type owl:ObjectProperty ;
+            owl:inverseOf :sellBook ;
+            rdfs:domain :Bookshop ;
+            rdfs:range :Publisher .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasBookPublisher
+:hasBookPublisher rdf:type owl:ObjectProperty ;
+                  owl:inverseOf :isBookPublisher ;
+                  rdf:type owl:FunctionalProperty ;
+                  rdfs:domain :Book ;
+                  rdfs:range :Publisher .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasLibraryLocatedIn
+:hasLibraryLocatedIn rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :isLibraryLocatedIn ;
+                     rdf:type owl:InverseFunctionalProperty ;
+                     rdfs:domain :Place ;
+                     rdfs:range :Library .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptAuthor
+:hasManuscriptAuthor rdf:type owl:ObjectProperty ;
+                     owl:inverseOf :isManuscriptAuthor ;
+                     rdf:type owl:FunctionalProperty ;
+                     rdfs:domain :Manuscript ;
+                     rdfs:range :Author .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptCollectedIn
+:hasManuscriptCollectedIn rdf:type owl:ObjectProperty ;
+                          owl:inverseOf :isManuscriptCollectedIn ;
+                          rdf:type owl:InverseFunctionalProperty ;
+                          rdfs:domain :Library ;
+                          rdfs:range :Manuscript .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptGenre
+:hasManuscriptGenre rdf:type owl:ObjectProperty ;
+                    owl:inverseOf :isManuscriptGenre ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range :LiteraryGenre .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptIncludedIn
+:hasManuscriptIncludedIn rdf:type owl:ObjectProperty ;
+                         owl:inverseOf :isManuscriptIncludedIn ;
+                         rdfs:domain :Book ;
+                         rdfs:range :Manuscript .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublicationAgreement
+:hasPublicationAgreement rdf:type owl:ObjectProperty ;
+                         owl:inverseOf :isPubblicationAgreement ;
+                         rdfs:domain :Publisher ;
+                         rdfs:range :Library ;
+                         owl:propertyChainAxiom ( :isBookPublisher
+                                                  :hasManuscriptIncludedIn
+                                                  :isManuscriptCollectedIn
+                                                ) .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isBookPublisher
+:isBookPublisher rdf:type owl:ObjectProperty ,
+                          owl:InverseFunctionalProperty ;
+                 rdfs:domain :Publisher ;
+                 rdfs:range :Book .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isLibraryLocatedIn
+:isLibraryLocatedIn rdf:type owl:ObjectProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain :Library ;
+                    rdfs:range :Place .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptAuthor
+:isManuscriptAuthor rdf:type owl:ObjectProperty ,
+                             owl:InverseFunctionalProperty ;
+                    rdfs:domain :Author ;
+                    rdfs:range :Manuscript .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptCollectedIn
+:isManuscriptCollectedIn rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain :Manuscript ;
+                         rdfs:range :Library .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptGenre
+:isManuscriptGenre rdf:type owl:ObjectProperty ;
+                   rdfs:domain :LiteraryGenre ;
+                   rdfs:range :Manuscript .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptIncludedIn
+:isManuscriptIncludedIn rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Manuscript ;
+                        rdfs:range :Book .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isPubblicationAgreement
+:isPubblicationAgreement rdf:type owl:ObjectProperty ;
+                         rdfs:domain :Library ;
+                         rdfs:range :Publisher .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#sellBook
+:sellBook rdf:type owl:ObjectProperty ;
+          rdfs:domain :Publisher ;
+          rdfs:range :Bookshop .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasBookISBN
+:hasBookISBN rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :hasCode ;
+             rdf:type owl:FunctionalProperty ;
+             rdfs:domain :Book ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasBookTitle
+:hasBookTitle rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :hasTitle ;
+              rdf:type owl:FunctionalProperty ;
+              rdfs:domain :Book ;
+              rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasCode
+:hasCode rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptDate
+:hasManuscriptDate rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain :Manuscript ;
+                   rdfs:range xsd:dateTime .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptID
+:hasManuscriptID rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :hasCode ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Manuscript ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptTitle
+:hasManuscriptTitle rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :hasTitle ;
+                    rdf:type owl:FunctionalProperty ;
+                    rdfs:domain :Manuscript ;
+                    rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublisherID
+:hasPublisherID rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf :hasCode ;
+                rdf:type owl:FunctionalProperty ;
+                rdfs:domain :Publisher ;
+                rdfs:range xsd:positiveInteger .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublisherName
+:hasPublisherName rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Publisher ;
+                  rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Author
+:Author rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Book
+:Book rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasBookPublisher ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :Publisher
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasBookISBN ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :hasBookTitle ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onDataRange xsd:string
+                      ] .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Bookshop
+:Bookshop rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Library
+:Library rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :isLibraryLocatedIn ;
+                           owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Place
+                         ] ;
+         owl:disjointUnionOf ( :PrivateLibrary
+                               :PublicLibrary
+                             ) .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#LiteraryGenre
+:LiteraryGenre rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Manuscript
+:Manuscript rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasManuscriptGenre ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :LiteraryGenre
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isManuscriptIncludedIn ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Book
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasManuscriptAuthor ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Author
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :isManuscriptCollectedIn ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Library
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasManuscriptDate ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:dateTime
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasManuscriptID ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasManuscriptTitle ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ;
+            owl:disjointUnionOf ( :MedievalManuscript
+                                  :RenaissanceManuscript
+                                ) .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#MedievalManuscript
+:MedievalManuscript rdf:type owl:Class ;
+                    rdfs:subClassOf :Manuscript .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Place
+:Place rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#PrivateLibrary
+:PrivateLibrary rdf:type owl:Class ;
+                rdfs:subClassOf :Library .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#PublicLibrary
+:PublicLibrary rdf:type owl:Class ;
+               rdfs:subClassOf :Library .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Publisher
+:Publisher rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublicationAgreement ;
+                             owl:someValuesFrom :Library
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :isBookPublisher ;
+                             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Book
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :sellBook ;
+                             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Bookshop
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublisherID ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:positiveInteger
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasPublisherName ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#RenaissanceManuscript
+:RenaissanceManuscript rdf:type owl:Class ;
+                       rdfs:subClassOf :Manuscript .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Author
+                :Book
+                :Bookshop
+                :Library
+                :LiteraryGenre
+                :Manuscript
+                :Place
+                :Publisher
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
