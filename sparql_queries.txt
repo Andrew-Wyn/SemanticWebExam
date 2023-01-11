@@ -1,0 +1,31 @@
+Q11.1
+
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?manuscriptIri ?manuscriptDate ?libraryIri
+WHERE {
+	?manuscriptIri a :Manuscript ;
+                   :hasManuscriptDate ?manuscriptDate ;
+                   :isManuscriptCollectedIn ?libraryIri .
+    FILTER ( ?manuscriptDate > "1230"^^xsd:dateTime && ?manuscriptDate < "1350"^^xsd:dateTime )
+}
+
+Q11.2
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+SELECT ?bookIri ?bookTitle
+WHERE {
+	?bookIri a :Book ;
+             :hasBookTitle ?bookTitle .
+} ORDER BY ?bookTitle LIMIT 2 OFFSET 2
+
+Q11.3
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+SELECT ?manuscriptIri ?manuscriptTitle ?bookTitle ?bookISBN ?publisherIri
+WHERE {
+	?manuscriptIri a :Manuscript ;
+                   :isManuscriptIncludedIn ?bookIri ;
+                   :hasManuscriptTitle ?manuscriptTitle .
+  	?bookIri :hasBookPublisher ?publisherIri ;
+             :hasBookTitle ?bookTitle ;
+             :hasBookISBN ?bookISBN .
+}

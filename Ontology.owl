@@ -338,6 +338,136 @@
 
 
 #################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#ariosto
+:ariosto rdf:type owl:NamedIndividual ,
+                  :Author .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#codexRegius
+:codexRegius rdf:type owl:NamedIndividual ,
+                      :RenaissanceManuscript ;
+             :hasManuscriptAuthor :ariosto ;
+             :hasManuscriptGenre :genereEpico ;
+             :isManuscriptCollectedIn :libreriaLaurenziana ;
+             :isManuscriptIncludedIn :tantiRacconti ;
+             :hasManuscriptDate "1235-01-01T00:00:00"^^xsd:dateTime ;
+             :hasManuscriptID "efgh"^^xsd:string ;
+             :hasManuscriptTitle "Codex Regius"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#dante
+:dante rdf:type owl:NamedIndividual ,
+                :Author .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#discorsiRinascimentali
+:discorsiRinascimentali rdf:type owl:NamedIndividual ,
+                                 :Book ;
+                        :hasBookPublisher :harperCollins ;
+                        :hasBookISBN "ISBN:zzz"^^xsd:string ;
+                        :hasBookTitle "Discorsi Rinascimentali"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#fantasieBarocche
+:fantasieBarocche rdf:type owl:NamedIndividual ,
+                           :Book ;
+                  :hasBookPublisher :harperCollins ;
+                  :hasBookISBN "ISBN:tyu"^^xsd:string ;
+                  :hasBookTitle "Fantasie Barocche"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#feltrinelli
+:feltrinelli rdf:type owl:NamedIndividual ,
+                      :Bookshop .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#genereEpico
+:genereEpico rdf:type owl:NamedIndividual ,
+                      :LiteraryGenre .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#harperCollins
+:harperCollins rdf:type owl:NamedIndividual ,
+                        :Publisher ;
+               :isBookPublisher :leMiglioriRaccolteMedievali ,
+                                :tantiRacconti ;
+               :sellBook :feltrinelli ,
+                         :mondadori ;
+               :hasPublisherID "1234"^^xsd:positiveInteger ;
+               :hasPublisherName "Harper Collins"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#leMiglioriRaccolteMedievali
+:leMiglioriRaccolteMedievali rdf:type owl:NamedIndividual ,
+                                      :Book ;
+                             :hasBookPublisher :harperCollins ;
+                             :hasBookISBN "ISBN:abcd"^^xsd:string ;
+                             :hasBookTitle "Le Migliori Raccolte Medievali"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#libreriaComunale
+:libreriaComunale rdf:type owl:NamedIndividual ,
+                           :PublicLibrary ;
+                  :isLibraryLocatedIn :roma .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#libreriaLaurenziana
+:libreriaLaurenziana rdf:type owl:NamedIndividual ,
+                              :PrivateLibrary ;
+                     :isLibraryLocatedIn :pisa .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#libroDiKells
+:libroDiKells rdf:type owl:NamedIndividual ,
+                       :MedievalManuscript ;
+              :hasManuscriptAuthor :dante ;
+              :hasManuscriptGenre :genereEpico ;
+              :isManuscriptCollectedIn :libreriaComunale ;
+              :isManuscriptIncludedIn :leMiglioriRaccolteMedievali ;
+              :hasManuscriptDate "1400-01-01T00:00:00"^^xsd:dateTime ;
+              :hasManuscriptID "abcd"^^xsd:string ;
+              :hasManuscriptTitle "Libro Di Kells"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#mondadori
+:mondadori rdf:type owl:NamedIndividual ,
+                    :Bookshop .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#papiriDiErcolano
+:papiriDiErcolano rdf:type owl:NamedIndividual ,
+                           :MedievalManuscript ;
+                  :hasManuscriptAuthor :dante ;
+                  :hasManuscriptGenre :genereEpico ;
+                  :isManuscriptCollectedIn :libreriaComunale ;
+                  :isManuscriptIncludedIn :leMiglioriRaccolteMedievali ;
+                  :hasManuscriptDate "1220-01-01T00:00:00"^^xsd:dateTime ;
+                  :hasManuscriptID "ijkl"^^xsd:string ;
+                  :hasManuscriptTitle "Papiri Di Ercolano"^^xsd:string .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#pisa
+:pisa rdf:type owl:NamedIndividual ,
+               :Place .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#roma
+:roma rdf:type owl:NamedIndividual ,
+               :Place .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#tantiRacconti
+:tantiRacconti rdf:type owl:NamedIndividual ,
+                        :Book ;
+               :hasBookPublisher :harperCollins ;
+               :hasBookISBN "ISBN:efgh"^^xsd:string ;
+               :hasBookTitle "Tanti Racconti"^^xsd:string .
+
+
+#################################################################
 #    General axioms
 #################################################################
 
