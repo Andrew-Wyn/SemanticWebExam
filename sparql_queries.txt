@@ -17,7 +17,7 @@ SELECT ?bookIri ?bookTitle
 WHERE {
 	?bookIri a :Book ;
              :hasBookTitle ?bookTitle .
-} ORDER BY ?bookTitle LIMIT 2 OFFSET 2
+} ORDER BY ?bookTitle LIMIT 2 OFFSET 3
 
 Q11.3
 
