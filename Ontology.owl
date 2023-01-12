@@ -16,7 +16,9 @@
 :boughtBook rdf:type owl:ObjectProperty ;
             owl:inverseOf :sellBook ;
             rdfs:domain :Bookshop ;
-            rdfs:range :Publisher .
+            rdfs:range :Publisher ;
+            rdfs:comment "sell Book For relates a bookshop with a publisher which publish books thorough it"@en ;
+            rdfs:label "sell Book For"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasBookPublisher
@@ -24,7 +26,9 @@
                   owl:inverseOf :isBookPublisher ;
                   rdf:type owl:FunctionalProperty ;
                   rdfs:domain :Book ;
-                  rdfs:range :Publisher .
+                  rdfs:range :Publisher ;
+                  rdfs:comment "has Book Publisher relates the book with the publisher that publish it"@en ;
+                  rdfs:label "has Book Publisher"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasLibraryLocatedIn
@@ -32,7 +36,9 @@
                      owl:inverseOf :isLibraryLocatedIn ;
                      rdf:type owl:InverseFunctionalProperty ;
                      rdfs:domain :Place ;
-                     rdfs:range :Library .
+                     rdfs:range :Library ;
+                     rdfs:comment "has Library Located In relates a Place and a Library located in it"@en ;
+                     rdfs:label "has Library Located In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptAuthor
@@ -40,7 +46,9 @@
                      owl:inverseOf :isManuscriptAuthor ;
                      rdf:type owl:FunctionalProperty ;
                      rdfs:domain :Manuscript ;
-                     rdfs:range :Author .
+                     rdfs:range :Author ;
+                     rdfs:comment "has Manuscript Author relates a manuscript with its author"@en ;
+                     rdfs:label "has Manuscript Author"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptCollectedIn
@@ -48,21 +56,27 @@
                           owl:inverseOf :isManuscriptCollectedIn ;
                           rdf:type owl:InverseFunctionalProperty ;
                           rdfs:domain :Library ;
-                          rdfs:range :Manuscript .
+                          rdfs:range :Manuscript ;
+                          rdfs:comment "has Manuscript Collected In relates a library with a manuscript that is collected in it"@en ;
+                          rdfs:label "has Manuscript Collected In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptGenre
 :hasManuscriptGenre rdf:type owl:ObjectProperty ;
                     owl:inverseOf :isManuscriptGenre ;
                     rdfs:domain :Manuscript ;
-                    rdfs:range :LiteraryGenre .
+                    rdfs:range :LiteraryGenre ;
+                    rdfs:comment "has Manuscript Genre relates the manuscript with one of its genres"@en ;
+                    rdfs:label "has Manuscript Genre"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptIncludedIn
 :hasManuscriptIncludedIn rdf:type owl:ObjectProperty ;
                          owl:inverseOf :isManuscriptIncludedIn ;
                          rdfs:domain :Book ;
-                         rdfs:range :Manuscript .
+                         rdfs:range :Manuscript ;
+                         rdfs:comment "has Manuscript Included In relates a book with a manuscript included in it"@en ;
+                         rdfs:label "has Manuscript Included In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublicationAgreement
@@ -73,59 +87,77 @@
                          owl:propertyChainAxiom ( :isBookPublisher
                                                   :hasManuscriptIncludedIn
                                                   :isManuscriptCollectedIn
-                                                ) .
+                                                ) ;
+                         rdfs:comment "has Publication Agreement relates a publisher with a library which contain a manuscript contained in a book that the publisher publish"@en ;
+                         rdfs:label "has Publication Agreement"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isBookPublisher
 :isBookPublisher rdf:type owl:ObjectProperty ,
                           owl:InverseFunctionalProperty ;
                  rdfs:domain :Publisher ;
-                 rdfs:range :Book .
+                 rdfs:range :Book ;
+                 rdfs:comment "is Book Publisher relates a publisher with a book it publishes"@en ;
+                 rdfs:label "is Book Publisher"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isLibraryLocatedIn
 :isLibraryLocatedIn rdf:type owl:ObjectProperty ,
                              owl:FunctionalProperty ;
                     rdfs:domain :Library ;
-                    rdfs:range :Place .
+                    rdfs:range :Place ;
+                    rdfs:comment "is Library Located In relates a library with the place in which it is located"@en ;
+                    rdfs:label "is Library Located In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptAuthor
 :isManuscriptAuthor rdf:type owl:ObjectProperty ,
                              owl:InverseFunctionalProperty ;
                     rdfs:domain :Author ;
-                    rdfs:range :Manuscript .
+                    rdfs:range :Manuscript ;
+                    rdfs:comment "is Manuscript Author relates an author with its manuscript"@en ;
+                    rdfs:label "is Manuscript Author"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptCollectedIn
 :isManuscriptCollectedIn rdf:type owl:ObjectProperty ,
                                   owl:FunctionalProperty ;
                          rdfs:domain :Manuscript ;
-                         rdfs:range :Library .
+                         rdfs:range :Library ;
+                         rdfs:comment "is Manuscript Collected In relates a manuscript with the library in which is collected"@en ;
+                         rdfs:label "is Manuscript Collected In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptGenre
 :isManuscriptGenre rdf:type owl:ObjectProperty ;
                    rdfs:domain :LiteraryGenre ;
-                   rdfs:range :Manuscript .
+                   rdfs:range :Manuscript ;
+                   rdfs:comment "is Manuscript Genre relates a genre with a manuscript"@en ;
+                   rdfs:label "is Manuscript Genre"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isManuscriptIncludedIn
 :isManuscriptIncludedIn rdf:type owl:ObjectProperty ;
                         rdfs:domain :Manuscript ;
-                        rdfs:range :Book .
+                        rdfs:range :Book ;
+                        rdfs:comment "is Manuscript Included In relates a manuscript with a book in which it is included"@en ;
+                        rdfs:label "is Manuscript Included In"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#isPubblicationAgreement
 :isPubblicationAgreement rdf:type owl:ObjectProperty ;
                          rdfs:domain :Library ;
-                         rdfs:range :Publisher .
+                         rdfs:range :Publisher ;
+                         rdfs:comment "is Publication Agreement relates a library with a publisher which publish a book that include manuscript contained in that library"@en ;
+                         rdfs:label "is Publication Agreement"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#sellBook
 :sellBook rdf:type owl:ObjectProperty ;
           rdfs:domain :Publisher ;
-          rdfs:range :Bookshop .
+          rdfs:range :Bookshop ;
+          rdfs:comment "sell Book Through relates a publisher with a bookshop in which the publisher sell its books"@en ;
+          rdfs:label "sell Book Through"@en .
 
 
 #################################################################
@@ -137,7 +169,9 @@
              rdfs:subPropertyOf :hasCode ;
              rdf:type owl:FunctionalProperty ;
              rdfs:domain :Book ;
-             rdfs:range xsd:string .
+             rdfs:range xsd:string ;
+             rdfs:comment "has Book ISBN relates a book with its ISBN Code"@en ;
+             rdfs:label "has Book ISBN"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasBookTitle
@@ -145,19 +179,25 @@
               rdfs:subPropertyOf :hasTitle ;
               rdf:type owl:FunctionalProperty ;
               rdfs:domain :Book ;
-              rdfs:range xsd:string .
+              rdfs:range xsd:string ;
+              rdfs:comment "has Book Title relates a book with its book"@en ;
+              rdfs:label "has Book Title"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasCode
 :hasCode rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty .
+                  owl:FunctionalProperty ;
+         rdfs:comment "has Code relates individuals with its code"@en ;
+         rdfs:label "has Code"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptDate
 :hasManuscriptDate rdf:type owl:DatatypeProperty ,
                             owl:FunctionalProperty ;
                    rdfs:domain :Manuscript ;
-                   rdfs:range xsd:dateTime .
+                   rdfs:range xsd:dateTime ;
+                   rdfs:comment "has Manuscript Date relates a manuscript with its creation date"@en ;
+                   rdfs:label "has Manuscript Date"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptID
@@ -165,7 +205,9 @@
                  rdfs:subPropertyOf :hasCode ;
                  rdf:type owl:FunctionalProperty ;
                  rdfs:domain :Manuscript ;
-                 rdfs:range xsd:string .
+                 rdfs:range xsd:string ;
+                 rdfs:comment "has Manuscript ID relates a manuscript with its ID"@en ;
+                 rdfs:label "has Manuscript ID"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasManuscriptTitle
@@ -173,7 +215,9 @@
                     rdfs:subPropertyOf :hasTitle ;
                     rdf:type owl:FunctionalProperty ;
                     rdfs:domain :Manuscript ;
-                    rdfs:range xsd:string .
+                    rdfs:range xsd:string ;
+                    rdfs:comment "has Manuscript Title relates a manuscript with its title"@en ;
+                    rdfs:label "has Manuscript Title"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublisherID
@@ -181,19 +225,25 @@
                 rdfs:subPropertyOf :hasCode ;
                 rdf:type owl:FunctionalProperty ;
                 rdfs:domain :Publisher ;
-                rdfs:range xsd:positiveInteger .
+                rdfs:range xsd:positiveInteger ;
+                rdfs:comment "has Publisher ID relates a publisher with its ID"@en ;
+                rdfs:label "has Publisher ID"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasPublisherName
 :hasPublisherName rdf:type owl:DatatypeProperty ,
                            owl:FunctionalProperty ;
                   rdfs:domain :Publisher ;
-                  rdfs:range xsd:string .
+                  rdfs:range xsd:string ;
+                  rdfs:comment "has Publisher Name relates a publisher with its name"@en ;
+                  rdfs:label "has Publisher Name"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#hasTitle
 :hasTitle rdf:type owl:DatatypeProperty ,
-                   owl:FunctionalProperty .
+                   owl:FunctionalProperty ;
+          rdfs:comment "has Title relates an individual with its title"@en ;
+          rdfs:label "has Title"@en .
 
 
 #################################################################
@@ -201,7 +251,9 @@
 #################################################################
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Author
-:Author rdf:type owl:Class .
+:Author rdf:type owl:Class ;
+        rdfs:comment "The class that rapresent the author of the Manuscripts"@en ;
+        rdfs:label "Author"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Book
@@ -220,11 +272,15 @@
                         owl:onProperty :hasBookTitle ;
                         owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                         owl:onDataRange xsd:string
-                      ] .
+                      ] ;
+      rdfs:comment "The class that represent the book in which the manuscripts are included, the book will be publisher throught a Publisher. A book has a title and an ISBN code."@en ;
+      rdfs:label "Book"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Bookshop
-:Bookshop rdf:type owl:Class .
+:Bookshop rdf:type owl:Class ;
+          rdfs:comment "The class that represent the Bookshop, a bookshop is the way a publisher can sell their books."@en ;
+          rdfs:label "Bookshop"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Library
@@ -236,11 +292,15 @@
                          ] ;
          owl:disjointUnionOf ( :PrivateLibrary
                                :PublicLibrary
-                             ) .
+                             ) ;
+         rdfs:comment "The class that represent Library, a library is the structure in which the manuscripts are stored, a library is located in exactly one Place. A library can be Public or Private."@en ;
+         rdfs:label "Library"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#LiteraryGenre
-:LiteraryGenre rdf:type owl:Class .
+:LiteraryGenre rdf:type owl:Class ;
+               rdfs:comment "The class that represent the Literary Genre, a manuscript can have one or more literary genre."@en ;
+               rdfs:label "Literary Genre"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Manuscript
@@ -282,26 +342,36 @@
                             ] ;
             owl:disjointUnionOf ( :MedievalManuscript
                                   :RenaissanceManuscript
-                                ) .
+                                ) ;
+            rdfs:comment "The class that represent the Manuscript, a manuscript has a title, an author, an identifier and a date of creation, a manuscript belong to at least one literary genre and is collected in exactly one library, moreover a manuscript can be Medieval manuscript or a Renaissance manuscript."@en ;
+            rdfs:label "Manuscript"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#MedievalManuscript
 :MedievalManuscript rdf:type owl:Class ;
-                    rdfs:subClassOf :Manuscript .
+                    rdfs:subClassOf :Manuscript ;
+                    rdfs:comment "The class that represent the Medieval Manuscript that is a sub-class of Manuscript."@en ;
+                    rdfs:label "Medieval Manuscript"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Place
-:Place rdf:type owl:Class .
+:Place rdf:type owl:Class ;
+       rdfs:comment "The class that represent the Place, a place is where a library is located."@en ;
+       rdfs:label "Place"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#PrivateLibrary
 :PrivateLibrary rdf:type owl:Class ;
-                rdfs:subClassOf :Library .
+                rdfs:subClassOf :Library ;
+                rdfs:comment "The class that represent the PrivateLibrary that is a sub-class of Library."@en ;
+                rdfs:label "Private Library"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#PublicLibrary
 :PublicLibrary rdf:type owl:Class ;
-               rdfs:subClassOf :Library .
+               rdfs:subClassOf :Library ;
+               rdfs:comment "The class that represent the PublicLibrary that is a sub-class of Library."@en ;
+               rdfs:label "Public Library"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#Publisher
@@ -329,12 +399,16 @@
                              owl:onProperty :hasPublisherName ;
                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                              owl:onDataRange xsd:string
-                           ] .
+                           ] ;
+           rdfs:comment "The class that represent a Publisher. A publisher sells the published books throught  a bookshop, a publisher is identified by a name and an ID, moreover a publisher has a publication agreement with the library in which the manuscripts, inside its published books, are collected."@en ;
+           rdfs:label "Publisher"@en .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#RenaissanceManuscript
 :RenaissanceManuscript rdf:type owl:Class ;
-                       rdfs:subClassOf :Manuscript .
+                       rdfs:subClassOf :Manuscript ;
+                       rdfs:comment "The class that represent the Renaissance Manuscript that is a sub-class of Manuscript."@en ;
+                       rdfs:label "Renaissance Manuscript"@en .
 
 
 #################################################################
@@ -457,6 +531,14 @@
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#roma
 :roma rdf:type owl:NamedIndividual ,
                :Place .
+
+
+###  http://www.semanticweb.org/medieval-renaissance-manuscripts#storieDellaBuonanotte
+:storieDellaBuonanotte rdf:type owl:NamedIndividual ,
+                                :Book ;
+                       :hasBookPublisher :harperCollins ;
+                       :hasBookISBN "ISBN: rrrr"^^xsd:string ;
+                       :hasBookTitle "Storie Della Buonanotte"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/medieval-renaissance-manuscripts#tantiRacconti
