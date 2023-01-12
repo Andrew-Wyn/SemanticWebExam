@@ -11,6 +11,7 @@ WHERE {
 }
 
 Q11.2
+
 PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
 SELECT ?bookIri ?bookTitle
 WHERE {
@@ -19,6 +20,7 @@ WHERE {
 } ORDER BY ?bookTitle LIMIT 2 OFFSET 2
 
 Q11.3
+
 PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
 SELECT ?manuscriptIri ?manuscriptTitle ?bookTitle ?bookISBN ?publisherIri
 WHERE {

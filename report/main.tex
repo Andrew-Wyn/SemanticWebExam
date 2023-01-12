@@ -1,5 +1,40 @@
-\documentclass{report}
+\documentclass[12pt]{report}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=23mm,
+    right=23mm,
+    top=23mm
+}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 \title{Semantic Web Exam}
 \author{Luca Moroni}
@@ -9,13 +44,101 @@
 
 \maketitle
 
-\section*{Question 1}
+\section*{Question 8}
+\textit{Identify two different assertions that would make the ontology inconsistent}
+\\~\\
+As first inconsistencie I can violate the \textbf{Disjoint Class Axiom}, for example I can declare an individual as instance of the disjoint classes.\\
+\begin{lstlisting}[language=Python]
+:codexRegius rdf:type owl:NamedIndividual ,
+                      :Book ,
+                      :RenaissanceManuscript ;
+\end{lstlisting}
+In this case I define \textit{codeRegius} individual as instance of \textit{Book} and \textit{RanaissanceManuscript} that are two disjoint classes\\~\\
+As second inconsistence I can violate \textbf{Object Property Cardinality Restriction} for example I can violate the \textbf{Exact Cardinality}, adding as assertions the fact that an individual is in relation with more than some number of different individuals (or literals), violating so the cardinality defined by the exact cardinality restriction.\\
+\begin{lstlisting}[language=Python, caption=Publisher class definition with exactly cardinality of 1 constraint on hasPublisherID]
+:Publisher rdf:type owl:Class ;
+       rdfs:subClassOf
+            ...
+            [ rdf:type owl:Restriction ;
+            owl:onProperty :hasPublisherID ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onDataRange xsd:positiveInteger
+            ] ;
+            ...
+\end{lstlisting}
+\begin{lstlisting}[language=Python, caption=Publisher individual with two publisherID]
+:harperCollins rdf:type owl:NamedIndividual ,
+                        :Publisher ;
+               ...
+               :hasPublisherID "1222"^^xsd:positiveInteger ,
+                               "1234"^^xsd:positiveInteger ;
+               ...
+\end{lstlisting}
+In this case I define \textit{harperCollins} individual as instance of \textit{Publisher} with two different axioms on \textit{hasPublisherID} relating the individual with two different literals, violating the exact cardinality restriction.
+\newpage
+\section*{Question 9}
+\textit{Define the complex role inclusion axiom capturing the fact that if a publisher publishes a book that includes a manuscript that is collected in a library, then the publisher has a publication agreement
+with that library}\\~\\
+\begin{lstlisting}[language=Python, caption=Definition of the complex role inclusion axiom in turtle]
+:hasPublicationAgreement rdf:type owl:ObjectProperty ;
+                         ...
+                    owl:propertyChainAxiom ( :isBookPublisher
+                                    :hasManuscriptIncludedIn
+                                    :isManuscriptCollectedIn
+                                                ) .
+\end{lstlisting}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-\section*{Question 2}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+\begin{lstlisting}[language=Python, caption=Definition of the complex role inclusion axiom]
+isBookPublisher o hasManuscriptIncludedIn o isManuscriptCollectedIn SubPropertyOf: hasPublicationAgreement
+\end{lstlisting}
+\section*{Question 10}
+\textit{Verify if the created ontology (including the complex role inclusion axiom defined in Q9) satisfies
+the global restrictions on the axioms of an OWL 2 DL ontology}\\~\\
+\begin{itemize}
+    \item \textbf{Restriction on owl:topDataProperty} $\rightarrow$ This restriction is satisfied because the ontology does not include any axiom on \textbf{owl:topDataProperty}. In particular we don't define any dataProperty as super-property of \textbf{owl:topDataProperty}.
+    \item \textbf{Restriction on Datatypes} $\rightarrow$ This is satisfied because I use only datatypes defined in the OWL2 datatype map. And I don't define any custom data range, so the strict partial order is not violated.
+    \item \textbf{Restriction on Simple Roles} $\rightarrow$ This is satisfied because our composite object properties is not used in an axiom of the forbidden kinds.
+    \item \textbf{Restriction on the Property Hierarchy} $\rightarrow$ This is satisfied because I define only one object property chain and it doesn't create any cycle.
+    \item \textbf{Restriction on Anonymous Individuals} $\rightarrow$ This is satisfied because I don't have any anonymous individual in my Ontology.
+\end{itemize}
+\newpage
+\section*{Question 11}
+\textit{SPARQL Queries}\\~\\
+\subsubsection*{Question 11.1}
+\textit{Find the manuscripts created between 1230 and 1350 and for each manuscript the library in which it is collected}\\~\\
+\begin{lstlisting}[language=SPARQL]
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?manuscriptIri ?manuscriptDate ?libraryIri
+WHERE {
+	?manuscriptIri a :Manuscript ;
+                   :hasManuscriptDate ?manuscriptDate ;
+                   :isManuscriptCollectedIn ?libraryIri .
+    FILTER ( ?manuscriptDate > "1230"^^xsd:dateTime && ?manuscriptDate < "1350"^^xsd:dateTime )
+}
+\end{lstlisting}
+\subsubsection*{Question 11.2}
+\textit{ Among all books ordered by title, find the title of two books starting from the third result}\\~\\
+\begin{lstlisting}[language=SPARQL]
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+SELECT ?bookIri ?bookTitle
+WHERE {
+	?bookIri a :Book ;
+             :hasBookTitle ?bookTitle .
+} ORDER BY ?bookTitle LIMIT 2 OFFSET 2
+\end{lstlisting}
+\subsubsection*{Question 11.2}
+\textit{Find the manuscripts that are published in a book, the titles of the manuscripts, and the title, ISBN code and the publisher of the book}\\~\\
+\begin{lstlisting}[language=SPARQL]
+PREFIX : <http://www.semanticweb.org/medieval-renaissance-manuscripts#>
+SELECT ?manuscriptIri ?manuscriptTitle ?bookTitle ?bookISBN ?publisherIri
+WHERE {
+	?manuscriptIri a :Manuscript ;
+                   :isManuscriptIncludedIn ?bookIri ;
+                   :hasManuscriptTitle ?manuscriptTitle .
+  	?bookIri :hasBookPublisher ?publisherIri ;
+             :hasBookTitle ?bookTitle ;
+             :hasBookISBN ?bookISBN .
+}
+\end{lstlisting}
 \end{document}
-
